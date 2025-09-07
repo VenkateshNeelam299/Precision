@@ -1,4 +1,313 @@
 [
-  { "title": "First", "content": "First content" },
-  { "title": "Second", "content": "Second content" }
+  {
+    "title": "Polymorphism",
+    "content": "Polymorphism in C# allows objects to be treated as instances of their base type while invoking derived implementations at runtime. Achieved with virtual/override and interfaces.",
+    "example": "class Animal { public virtual void Speak() {} } class Dog : Animal { public override void Speak() => Console.WriteLine(\"Woof\"); } Animal a = new Dog(); a.Speak();"
+  },
+  {
+    "title": "Inheritance",
+    "content": "Inheritance lets a class (derived) reuse members of another class (base), enabling code reuse and an is-a relationship.",
+    "example": "class Base { public void M() {} } class Derived : Base { } var d = new Derived(); d.M();"
+  },
+  {
+    "title": "Encapsulation",
+    "content": "Encapsulation hides internal state and exposes behavior via public members; access modifiers (private/protected/public) enforce it.",
+    "example": "class Person { private int age; public int Age { get => age; set => age = value; } }"
+  },
+  {
+    "title": "Abstraction",
+    "content": "Abstraction exposes only necessary details and hides implementation. Use abstract classes or interfaces to define contracts.",
+    "example": "abstract class Shape { public abstract double Area(); } class Circle : Shape { public double R; public override double Area() => Math.PI*R*R; }"
+  },
+  {
+    "title": "Interface",
+    "content": "An interface defines a contract of members (methods/properties/events) without implementation. Types implement interfaces to provide behavior.",
+    "example": "interface ILogger { void Log(string msg); } class ConsoleLogger : ILogger { public void Log(string msg) => Console.WriteLine(msg); }"
+  },
+  {
+    "title": "Delegate",
+    "content": "A delegate is a type-safe function pointer. Delegates are used for callbacks and form the basis of events.",
+    "example": "delegate void Notify(string message); Notify n = msg => Console.WriteLine(msg); n(\"hello\");"
+  },
+  {
+    "title": "Event",
+    "content": "Events provide a publish-subscribe mechanism built on delegates, allowing a class to notify subscribers when something happens.",
+    "example": "public class Button { public event EventHandler Clicked; void OnClick() => Clicked?.Invoke(this, EventArgs.Empty); }"
+  },
+  {
+    "title": "LINQ",
+    "content": "LINQ (Language Integrated Query) provides query capabilities over collections and data sources using IEnumerable/IQueryable with fluent or query syntax.",
+    "example": "var evens = numbers.Where(n => n % 2 == 0).ToList();"
+  },
+  {
+    "title": "Generics",
+    "content": "Generics enable type-safe data structures and methods without committing to a concrete type at compile time, reducing casts and runtime errors.",
+    "example": "List<int> list = new List<int>(); list.Add(42);"
+  },
+  {
+    "title": "Async/Await",
+    "content": "Async/await simplifies asynchronous programming by allowing asynchronous code to be written in a sequential style. Methods typically return Task or Task<T>.",
+    "example": "async Task Load() { var res = await httpClient.GetStringAsync(url); Console.WriteLine(res); }"
+  },
+  {
+    "title": "Value vs Reference Types",
+    "content": "Value types (structs, primitives) are copied on assignment and stored on the stack; reference types (classes) are references to heap objects. Mutating a copy of a value type does not affect the original.",
+    "example": "int a = 1; int b = a; b = 2; // a == 1; class C { public int X; } C c1 = new C{X=1}; C c2 = c1; c2.X = 2; // c1.X == 2"
+  },
+  {
+    "title": "Boxing and Unboxing",
+    "content": "Boxing converts a value type to object/reference type; unboxing extracts the value type from the object. Boxing/unboxing has performance costs.",
+    "example": "object o = 123; int i = (int)o; // boxing when assigning, unboxing when casting"
+  },
+  {
+    "title": "Nullable Types",
+    "content": "Nullable value types (T?) allow value types to represent null. Use HasValue/Value or the null-coalescing/conditional operators.",
+    "example": "int? n = null; if (n.HasValue) Console.WriteLine(n.Value); int m = n ?? 0;"
+  },
+  {
+    "title": "Extension Methods",
+    "content": "Extension methods add methods to existing types without modifying them, by defining a static method in a static class with the 'this' modifier on the first parameter.",
+    "example": "public static class StrExt { public static bool IsNullOrEmpty(this string s) => string.IsNullOrEmpty(s); } string s = null; bool ok = s.IsNullOrEmpty();"
+  },
+  {
+    "title": "Partial Classes",
+    "content": "Partial classes allow splitting a class definition across multiple files — useful for code generation and separation of concerns.",
+    "example": "// File1.cs: public partial class MyClass { void A() {} } // File2.cs: public partial class MyClass { void B() {} }"
+  },
+  {
+    "title": "Struct vs Class",
+    "content": "Structs are value types (no inheritance, lightweight) and good for small immutable data; classes are reference types with full OO features.",
+    "example": "struct Point { public int X, Y; } Point p1 = new Point{X=1}; Point p2 = p1; p2.X=2; // p1.X == 1"
+  },
+  {
+    "title": "IDisposable and using",
+    "content": "IDisposable defines Dispose() for releasing unmanaged resources. The 'using' statement ensures Dispose is called even on exceptions.",
+    "example": "using(var s = new FileStream(path, FileMode.Open)) { /* use stream */ } // Dispose called automatically"
+  },
+  {
+    "title": "Records (C# 9+)",
+    "content": "Records provide immutable reference types with built-in value equality, concise syntax for DTOs and pattern matching support.",
+    "example": "public record Person(string Name, int Age); var p = new Person(\"Alice\",30); var p2 = p with { Age = 31 };"
+  },
+  {
+    "title": "Pattern Matching",
+    "content": "Pattern matching enables concise type checks and deconstruction in switch/if expressions (is, switch, relational and positional patterns).",
+    "example": "if (obj is Person p) Console.WriteLine(p.Name); switch(x) { case int n when n>0: break; }"
+  },
+  {
+    "title": "Covariance and Contravariance",
+    "content": "Covariance allows implicit conversion of generic types for output positions (e.g., IEnumerable<Derived> to IEnumerable<Base>), contravariance for input positions (e.g., Action<Base> to Action<Derived>).",
+    "example": "IEnumerable<string> s = new List<string>(); IEnumerable<object> o = s; // covariance"
+  },
+  {
+    "title": "Garbage Collection",
+    "content": "C# uses a generational garbage collector to manage memory. Developers should release unmanaged resources via IDisposable; forcing GC.Collect() is rarely needed.",
+    "example": "class C { ~C() { /* finalizer */ } } // prefer implementing IDisposable for deterministic cleanup"
+  },
+  {
+    "title": "Threading and TPL",
+    "content": "The Task Parallel Library (TPL) and async/await simplify concurrent and parallel programming. Use Task, Task.Run, and synchronization primitives when needed.",
+    "example": "var tasks = Enumerable.Range(1,5).Select(i => Task.Run(() => DoWork(i))); await Task.WhenAll(tasks);"
+  },
+
+  {
+    "title": "Middleware (ASP.NET Core)",
+    "content": "Middleware are components in the HTTP request pipeline that can handle requests and responses. You register middleware in Program.cs/Startup using app.UseXyz().",
+    "example": "app.Use(async (context, next) => { Console.WriteLine(\"Before\"); await next(); Console.WriteLine(\"After\"); });"
+  },
+  {
+    "title": "Kestrel vs IIS",
+    "content": "Kestrel is the cross-platform web server for ASP.NET Core. In production it is often run behind a reverse proxy (IIS, Nginx) for additional features like process management or TLS termination.",
+    "example": "In Docker: dotnet MyApp.dll (Kestrel serves requests directly)."
+  },
+  {
+    "title": "Dependency Injection (DI)",
+    "content": "ASP.NET Core has built-in dependency injection. Services are registered with lifetimes (Singleton, Scoped, Transient) and injected into constructors.",
+    "example": "services.AddScoped<IRepo, Repo>(); public class C { public C(IRepo repo) { _repo=repo; } }"
+  },
+  {
+    "title": "Configuration (appsettings.json)",
+    "content": "Configuration in .NET Core is hierarchical and provider-based (JSON, environment, secrets, etc.). Bind strongly-typed objects using IConfiguration or options pattern.",
+    "example": "builder.Configuration.GetSection(\"MySettings\").Bind(mySettings); or services.Configure<MySettings>(Configuration.GetSection(\"MySettings\"));"
+  },
+  {
+    "title": "Logging (Microsoft.Extensions.Logging)",
+    "content": "ASP.NET Core uses a logging abstraction with providers (Console, Debug, Seq, etc.). Inject ILogger<T> and log with structured messages.",
+    "example": "public HomeController(ILogger<HomeController> log) { _log = log; } _log.LogInformation(\"User {UserId} logged in\", userId);"
+  },
+  {
+    "title": "Entity Framework Core (DbContext)",
+    "content": "EF Core is the ORM for .NET Core. Define DbContext and DbSet<T>, configure via OnModelCreating or fluent API, and use LINQ to query.",
+    "example": "public class AppDb : DbContext { public DbSet<User> Users { get; set; } } var users = await db.Users.Where(u=>u.Active).ToListAsync();"
+  },
+  {
+    "title": "Migrations (EF Core)",
+    "content": "Migrations manage schema changes. Use CLI commands to add and apply migrations which generate migration classes for schema evolution.",
+    "example": "dotnet ef migrations add InitialCreate; dotnet ef database update"
+  },
+  {
+    "title": "Minimal Hosting / Program.cs vs Startup.cs",
+    "content": "ASP.NET Core supports minimal hosting model (single Program.cs) and the older Startup.cs pattern. Both configure services and the request pipeline.",
+    "example": "var builder = WebApplication.CreateBuilder(args); var app = builder.Build(); app.MapGet(\"/\", ()=>\"Hello\"); app.Run();"
+  },
+  {
+    "title": "Health Checks",
+    "content": "Health checks provide endpoints to report app health. Register health checks and map endpoints for orchestration platforms to probe.",
+    "example": "services.AddHealthChecks(); app.MapHealthChecks(\"/health\");"
+  },
+  {
+    "title": "Configuration for Production (Secrets & Env)",
+    "content": "Use environment variables, Azure Key Vault or user-secrets for sensitive settings. Do not hard-code secrets in appsettings.json for production.",
+    "example": "builder.Configuration.AddEnvironmentVariables(); var conn = builder.Configuration[\"ConnectionStrings:Default\"];"
+  },
+  {
+    "title": "Dockerizing ASP.NET Core",
+    "content": "Package ASP.NET Core apps into containers using a Dockerfile that builds and publishes the app, then runs dotnet APP.dll in a runtime image.",
+    "example": "FROM mcr.microsoft.com/dotnet/aspnet:7.0 WORKDIR /app COPY ./publish . ENTRYPOINT [\"dotnet\",\"MyApp.dll\"]"
+  },
+  {
+    "title": "IHostedService / BackgroundService",
+    "content": "IHostedService is the interface for background tasks in Generic Host. BackgroundService is a base class that provides an ExecuteAsync loop with cancellation support. Use for long-running background work (workers, scheduled jobs).",
+    "example": "public class Worker : BackgroundService { protected override async Task ExecuteAsync(CancellationToken stoppingToken) { while(!stoppingToken.IsCancellationRequested) { await DoWork(); await Task.Delay(1000, stoppingToken); } } }"
+  },
+  {
+    "title": "Graceful shutdown and CancellationTokens",
+    "content": "Host shutdown sends cancellation tokens to services and controllers. Respect CancellationToken in async work to allow graceful shutdown and resource cleanup (Dispose/IDisposable + IHostedService).",
+    "example": "app.Lifetime.ApplicationStopping.Register(() => { /* cleanup */ }); // or accept CancellationToken in controllers/actions"
+  },
+  {
+    "title": "Observability: OpenTelemetry and Distributed Tracing",
+    "content": "Use OpenTelemetry for metrics, traces and logs. Instrument HTTP, EF Core, gRPC and custom spans to trace requests across services and visualize in systems like Jaeger/Zipkin/OTel Collector.",
+    "example": "services.AddOpenTelemetryTracing(builder => builder.AddAspNetCore().AddHttpClient().AddJaegerExporter());"
+  },
+  {
+    "title": "Structured logging and correlation IDs",
+    "content": "Use ILogger with structured logs for rich, queryable events. Include correlation/request IDs to tie logs across services. Logging providers output JSON for central analysis (Seq/Elastic).",
+    "example": "using (_logger.BeginScope(new { CorrelationId = traceId })) { _logger.LogInformation(\"Processing {OrderId}\", orderId); }"
+  },
+  {
+    "title": "Authentication & Authorization (JWT / OAuth2)",
+    "content": "ASP.NET Core supports JWT bearer authentication and OAuth2 flows. Validate tokens, configure policies, and use scope/claims-based authorization for fine-grained access control.",
+    "example": "services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opts => { opts.Authority = \"https://auth\"; opts.Audience = \"api\"; }); [Authorize(Policy=\"AdminOnly\")]"
+  },
+  {
+    "title": "Data Protection and key management",
+    "content": "DataProtection API handles encryption of cookies, tokens and keys. Configure key storage (file system, Azure blob, Redis) and automatic key rotation for multi-instance apps.",
+    "example": "services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(\"/keys\")).SetApplicationName(\"MyApp\");"
+  },
+  {
+    "title": "Performance tuning: GC, ThreadPool, and AOT",
+    "content": "Tune .NET performance using Server GC, threadpool settings, ReadyToRun or Native AOT and publish trimming. Profile hot paths and avoid excessive allocations and blocking calls.",
+    "example": "<RuntimeOptions> <GCServer enabled=\"true\"/> </RuntimeOptions> // or dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true"
+  },
+  {
+    "title": "gRPC in ASP.NET Core",
+    "content": "gRPC uses HTTP/2 for high-performance RPC between services. ASP.NET Core supports gRPC services and clients; design proto contracts and leverage streaming for duplex scenarios.",
+    "example": "endpoints.MapGrpcService<GreeterService>(); // proto: rpc SayHello (HelloRequest) returns (HelloReply);"
+  },
+  {
+    "title": "Distributed caching and Redis",
+    "content": "Use a distributed cache (Redis) for shared state and session caching across instances. Cache with proper expiration and cache stampede mitigation strategies.",
+    "example": "services.AddStackExchangeRedisCache(opts => { opts.Configuration = \"redis:6379\"; opts.InstanceName = \"MyApp\"; }); await cache.SetStringAsync(\"key\",\"val\");"
+  },
+  {
+    "title": "Message-driven architecture (RabbitMQ/Kafka) and idempotency",
+    "content": "Use message brokers for async communication and resiliency. Ensure consumers are idempotent and handle duplicates. Use at-least-once delivery semantics with dead-lettering and retries.",
+    "example": "bus.Publish(new OrderPlaced{Id=123}); // consumer checks if OrderProcessed(order.Id) before handling"
+  },
+  {
+    "title": "Resilience patterns: Retry, Circuit Breaker (Polly)",
+    "content": "Use Polly for transient-fault-handling (retry, circuit breaker, timeout, fallback). Combine with IHttpClientFactory to configure resiliency per external service.",
+    "example": "services.AddHttpClient(\"api\").AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(2)));"
+  },
+  {
+    "title": "Health, readiness and liveness probes",
+    "content": "Expose health endpoints for orchestration systems. Differentiate liveness (is process alive) from readiness (can serve traffic). Use health checks with tags and dependencies checks (DB, cache).",
+    "example": "services.AddHealthChecks().AddSqlServer(conn).AddRedis(redis); app.MapHealthChecks(\"/health/ready\", new HealthCheckOptions{Predicate = rc => rc.Tags.Contains(\"ready\")});"
+  },
+  {
+    "title": "Observability: Metrics and Prometheus",
+    "content": "Publish application metrics (response time, error rates) to Prometheus. Instrument middleware and libraries, expose /metrics endpoint, and use Grafana for dashboards.",
+    "example": "services.AddPrometheusCounters(); app.UseMetricServer(); // exposes /metrics"
+  },
+  {
+    "title": "Secrets management and secure deployments",
+    "content": "Avoid storing secrets in source. Use environment variables, Azure Key Vault, or AWS Secrets Manager. Integrate CI/CD to inject secrets at deploy time and rotate regularly.",
+    "example": "builder.Configuration.AddAzureKeyVault(new Uri(kvUrl), new DefaultAzureCredential()); var secret = config[\"MySecret\"];"
+  },
+  {
+    "title": "Deployment strategies: Blue/Green, Canary and zero-downtime",
+    "content": "Use deployment strategies (blue/green, canary) and health checks to achieve zero-downtime deployments. Combine with feature flags to control rollout.",
+    "example": "Use Kubernetes rolling update with readinessProbe and feature flag toggles for gradual release."
+  },
+  {
+    "title": "Normalization (1NF/2NF/3NF)",
+    "content": "Normalization is the process of organizing tables to reduce redundancy and improve data integrity. Common forms are 1NF (atomic values), 2NF (no partial dependencies), and 3NF (no transitive dependencies).",
+    "example": "Split Customer and Orders into two tables: Customers(Id, Name, ...) and Orders(Id, CustomerId, OrderDate, ...) with CustomerId FK to Customers."
+  },
+  {
+    "title": "Indexes (Clustered vs Non-Clustered)",
+    "content": "Clustered index defines physical row order (one per table). Non-clustered indexes are separate structures that speed reads for specific columns. Use indexes to improve SELECTs but avoid excessive indexing for writes.",
+    "example": "CREATE CLUSTERED INDEX IX_Orders_Id ON Orders(Id); CREATE NONCLUSTERED INDEX IX_Orders_CustomerId ON Orders(CustomerId);"
+  },
+  {
+    "title": "Execution Plans and Query Tuning",
+    "content": "Execution plans show how SQL Server executes a query. Use Actual Execution Plan to spot scans, expensive operators, missing indexes, and high-cost joins. Tune queries by rewriting, indexing, or updating statistics.",
+    "example": "SET STATISTICS IO ON; SET STATISTICS TIME ON; -- run query and view plan in SSMS or Azure Data Studio"
+  },
+  {
+    "title": "Transactions and Isolation Levels",
+    "content": "Transactions ensure atomicity across multiple statements. Isolation levels (READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SNAPSHOT, SERIALIZABLE) balance consistency vs concurrency and control phenomena like dirty reads and phantom reads.",
+    "example": "BEGIN TRAN; UPDATE Accounts SET Balance = Balance - 100 WHERE Id = 1; UPDATE Accounts SET Balance = Balance + 100 WHERE Id = 2; COMMIT;"
+  },
+  {
+    "title": "Deadlocks and detection/handling",
+    "content": "Deadlocks occur when two sessions hold locks the other needs. SQL Server detects deadlocks and kills a victim. Prevent by keeping transactions short, accessing objects in consistent order, and using appropriate lock hints when necessary.",
+    "example": "Use extended events or trace flag 1222 to capture deadlock graph; redesign transactions to access tables in same order to avoid deadlocks."
+  },
+  {
+    "title": "Stored Procedures vs Functions",
+    "content": "Stored procedures can perform actions and return result sets; they may have side effects. Functions (scalar/table-valued) are meant to be side-effect free and can be used in queries. Choose based on need for side-effects, performance, and composability.",
+    "example": "CREATE PROCEDURE GetOrders @CustId INT AS SELECT * FROM Orders WHERE CustomerId = @CustId; CREATE FUNCTION dbo.TotalOrders(@CustId INT) RETURNS INT AS BEGIN RETURN (SELECT COUNT(*) FROM Orders WHERE CustomerId=@CustId); END;"
+  },
+  {
+    "title": "ACID Properties",
+    "content": "ACID (Atomicity, Consistency, Isolation, Durability) are guarantees provided by the database transaction system to ensure reliable processing of transactions.",
+    "example": "Use BEGIN TRAN / COMMIT / ROLLBACK to ensure a multi-step payment operation is atomic and durable."
+  },
+  {
+    "title": "Temp Tables vs Table Variables",
+    "content": "Temp tables (#temp) are created in tempdb, support statistics and indexing, and are better for larger datasets. Table variables (@table) have more limited optimization but lower overhead for small data. Choose based on volume and need for statistics.",
+    "example": "CREATE TABLE #Tmp (Id INT); INSERT INTO #Tmp SELECT Id FROM Orders; -- vs DECLARE @Tmp TABLE (Id INT);"
+  },
+  {
+    "title": "Backup and Restore Strategies",
+    "content": "Implement full, differential, and transaction-log backups to meet RPO/RTO. Test restores regularly and use restore with STOPAT for point-in-time recovery when using full recovery model.",
+    "example": "BACKUP DATABASE MyDb TO DISK='C:\\backups\\MyDb_full.bak'; BACKUP LOG MyDb TO DISK='C:\\backups\\MyDb_log.trn'; RESTORE DATABASE MyDb FROM DISK='...';"
+  },
+  {
+    "title": "Always On Availability Groups / High Availability",
+    "content": "Availability Groups provide high availability and read-scale by replicating databases to secondary replicas. Configure failover modes, readable secondaries, and proper backups on secondary where supported.",
+    "example": "CREATE AVAILABILITY GROUP [AG1] ... -- configure replicas and listener in SQL Server and Windows/cluster or Azure SQL Managed Instance"
+  },
+  {
+    "title": "Parameter Sniffing",
+    "content": "Parameter sniffing is when SQL Server caches a plan optimized for the first execution parameters which may be suboptimal for others. Mitigate using plan hints, OPTIMIZE FOR, RECOMPILE, or plan guides.",
+    "example": "SELECT * FROM Orders WHERE CustomerId = @CustId OPTION (RECOMPILE); -- avoids reuse of a bad cached plan"
+  },
+  {
+    "title": "Statistics and Maintenance",
+    "content": "Statistics inform the optimizer about data distribution. Keep statistics up to date and reorganize/rebuild indexes regularly to maintain performance. Use AUTO_UPDATE_STATISTICS and schedule maintenance windows for index rebuilds.",
+    "example": "UPDATE STATISTICS Orders; ALTER INDEX ALL ON Orders REBUILD;"
+  },
+  {
+    "title": "Partitioning Tables",
+    "content": "Table partitioning splits large tables into smaller segments by key (e.g., date) improving manageability and performance for large datasets (partition elimination, faster archiving).",
+    "example": "CREATE PARTITION FUNCTION pfDateRange (DATE) AS RANGE LEFT FOR VALUES ('2020-01-01','2021-01-01'); CREATE PARTITION SCHEME psDateScheme AS PARTITION pfDateRange ALL TO ([PRIMARY]);"
+  },
+  {
+    "title": "Query Hints and When to Use Them",
+    "content": "Query hints (e.g., FORCESEEK, NOLOCK, MAXDOP) override optimizer behavior. Use sparingly and only after understanding costs; hints can improve a specific query but may degrade others.",
+    "example": "SELECT * FROM Orders WITH (FORCESEEK) WHERE OrderDate > '2024-01-01';"
+  }
 ]
