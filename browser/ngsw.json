@@ -1,0 +1,62 @@
+{
+  "configVersion": 1,
+  "timestamp": 1757256797765,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/chunk-QHSQYBBF.js",
+        "/chunk-VDCAASMQ.js",
+        "/index.html",
+        "/main-MWYUGFEE.js",
+        "/polyfills-FFHMD2TL.js",
+        "/styles-UIPN5QKN.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/chunk-QHSQYBBF.js": "b8437dabee9c941c34ba5add2cc2c4a43cd482af",
+    "/chunk-VDCAASMQ.js": "ab1eca29ca851632d1a157a641525560bba8b6c8",
+    "/index.html": "2763bdc580eba511923a0259a22faa8cb2532f36",
+    "/main-MWYUGFEE.js": "ea7922fd8de7f67b8297ab8258911706fc8b6dc4",
+    "/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
+    "/styles-UIPN5QKN.css": "77183a69bae5179288df4e6ec2ef6de88cce7377"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
