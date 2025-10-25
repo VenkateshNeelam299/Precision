@@ -1,7 +1,7 @@
 [
-  {
+   {
     "title": "Polymorphism",
-    "content": "Polymorphism in C# allows objects to be treated as instances of their base type while invoking derived implementations at runtime. Achieved with virtual/override and interfaces.",
+    "content": "Ploymorphism basically enables you to invoke derived class methods through base class reference variable at runtime. In the base class the method is declared virtual and in the derived class we override the same method",
     "example": "class Animal { public virtual void Speak() {} } class Dog : Animal { public override void Speak() => Console.WriteLine(\"Woof\"); } Animal a = new Dog(); a.Speak();"
   },
   {
